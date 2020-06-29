@@ -223,6 +223,10 @@ volumes:
 
 * docker-compose top ：该命令列出各个服务(容器)内运行的进程
 
+* docker-compose images: 查看compose中包含的镜像
+
+* docker-compose build [containerId]： 重建某个容器，在 Dockerfile 发生了改变的时候，可以重建image。然后再 up 运行起来所有的容器
+
 ##### 2. 下面执行以下 docker-compose down 作为demo演示以下。 可以看出来容器和网络已经被删除了， 但卷和镜像还在。
 
   ![image_down1](./images/compose_down1.png)
