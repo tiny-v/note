@@ -42,6 +42,7 @@ netstat -lntp  // 查看所有被监听的端口号
 * run   使用镜像构建容器并进入到容器交互命令 : docker run -itd -p port:port --name [containerName] [image]  /bin/bash
     * -d:  后台运行
     * -p (App Port):(Host Port) (指定端口号映射关系) | -P (将应用使用到的端口号映射到主机端口号上)
+    * --privileged=true : container会有很大的权限，基本可以做和主机一样的事儿了
         
 ### 容器操作
 
