@@ -68,15 +68,31 @@ netstat -lntp  // 查看所有被监听的端口号
 * docker-compose top ：该命令列出各个服务(容器)内运行的进程
 
 
-### 本地镜像管理
+### 镜像管理
 
-* pull 拉取镜像到本地： docker pull [image]
+* pull 拉取镜像到本地： 
+  *  docker pull [image] // 从公共仓库拉取镜像
+  *  docker pull [registery_url][imageUrl]:[imageTag] // 从指定镜像库拉取镜像
+  
 * build 通过Dockerfile来打镜像： docker build -t [image]:[tag] .
+
+* push 镜像到仓库步骤：
+
+  *  第一步： docker login --username=[username] [registery_url]  // 确保已经登录到仓库
+  *  第二步:  docker tag [localImage]:[localTag] [registery_url][imageUrl]:[imageTag]  // 修改镜像tag, 指定到仓库的具体位置
+  *  第三步： docker push [registery_url][imageUrl]:[imageTag] // push 镜像
+  
+* rmi 删除镜像： docker rmi [imageId]
+
 
 ### info|version
  
 *  查看docker 版本:		 docker -version
 *  查看docker详细信息:   docker info
+
+### 容器和宿主机之间的文件传输
+
+* 从容器传到宿主机： docker cp [containerName]:[con_file abs path] [host dir path]
 
 
 
