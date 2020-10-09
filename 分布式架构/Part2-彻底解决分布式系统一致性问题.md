@@ -8,3 +8,7 @@ todo:
 
    * Raft 协议
    * ZAB
+   
+3. 分布式中的常见理论
+
+   ACID / CAP / BASE 
