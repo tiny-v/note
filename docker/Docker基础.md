@@ -46,7 +46,7 @@ netstat -lntp  // 查看所有被监听的端口号
         
 ### 容器操作
 
-* exec 进入容器： docker exec -it [containerId] /bin/bash
+* exec 进入容器： docker exec -it [containerId] /bin/bash  |  docker exec -it [containerId] /bin/sh
 * exit 退出容器:  docker exit [containerId]
 
 ### 容器rootfs命令
