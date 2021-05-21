@@ -129,15 +129,15 @@ mvn+org.apache.hadoop:hadoop-core$2.6.0-mr1-cdh5.5.0
 ### 4. 命令行参考
 所有标志都应传递给调用的子命令。 当前不支持全局标志。
 
-| 命令           | 描述                      |
-| -----------   | -----------                   |
+| 命令           | 描述                           |
+| -----------   | -----------                    |
 | fossa         |  生成配置文件 & 分析当前配置       |
 | fossa init    |  生成配置文件                    |
 | fossa analyze |  分析当前配置                    |
 | fossa test    |  在最新的fossa扫描上失败CI作业     |
-| fossa upload  |  上传自定义构建信息     |
+| fossa upload  |  上传自定义构建信息               |
 | fossa report  |  获取有关最新的fossa扫描的信息     |
-| fossa update  |  更新当前的命令行版本     |
+| fossa update  |  更新当前的命令行版本              |
 
 #### fossa
 是 fossa init 和 fossa analyze 的合并
@@ -156,14 +156,44 @@ FOSSA_API_KEY=YOUR_API_KEY fossa
 
 默认情况下，**fossa init** 会过滤掉可能是开发，测试或依赖项的模块。 过滤器将删除文件路径中具有以下任何内容的所有模块：**docs**, **test**, **examples**, **third-party**, **vendor**, **tmp**, **node_modules**, **.srclib-cache**, **spec**, **Godeps**, **.git**, **bower_components**, **Carthage**, and **Checkouts**。 可以通过传递--include-all标志来禁用过滤。
 
-Example:
+##### Example
 ```
 # 在当前文件目录，创建 .fossa.yml 文件
 fossa init
 ```
 
-| Flag          | Short        | 描述 |
+| Flag          | Short        | 描述           |
 | -----------   | -----------  |-------------- |
-| --include-all |              | 包含所有模块    |
-| --debug       |              | 打印debug信息  |
-| --help        |      -h      | 打印help信息   |
+| --include-all |              | 包含所有模块     |
+| --debug       |              | 打印debug信息   |
+| --help        |      -h      | 打印help信息    |
+
+
+#### fossa analyze
+分析项目的依赖项列表，可以选择将结果上传到FOSSA。 如果分析失败，请首先查看受支持的环境页面中的文档(https://github.com/fossas/fossa-cli/blob/master/README.md/#supported-environments)，以获取特定于您的环境的信息，以及可以设置为对您的设置进行条件化的标志。
+
+> 注意：除非设置了--output，否则分析需要API密钥。
+
+
+##### Example
+```
+# 使用.fossa.yml运行分析并上传到服务器端点。
+FOSSA_API_KEY=YOUR_API_KEY fossa analyze
+```
+
+| Flag          | Short        | 描述           |
+| -----------   | -----------  |--------------  |
+| --config      |      -c      |  配置文件路径    |
+| --project     |      -p      |  项目           |
+| --revision    |      -r      |  版本号         |
+| --endpoint    |      -e      |  endpoint      |
+| --output      |      -o      |  分析结果输出方式                              |
+| --server-scan |              |  在原始模块上运行服务器端依赖项扫描                |
+| --dev         |              |  包括开发依赖项。 注意：仅对nodejs项目有效         |
+| --debug       |              |  打印debug信息                                |
+| --help        |      -h      |  帮助                                         |
+| --team        |      -T      |  将项目与FOSSA中的指定团队联系起来。 仅适用于新项目  |
+| --policy      |              |  将项目与FOSSA中的指定策略连接。 仅适用于新项目     |
+| --title       |      -t      |  设置显示在FOSSA UI中的标题。 仅适用于新项目       |
+
+> 注意：标题，策略和团队标志仅会在项目第一次上传时对其产生影响。 后续运行fossa analysis的所有标志都将被忽略。 创建此功能的目的是允许用户在首次上传时将项目与其团队相关联，但会阻止在UI中对CLI所做的更改。
