@@ -21,6 +21,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; iex  ((New-Object System.Net.W
 $env:Path += ";C:\ProgramData\fossa-cli"
 ```
 
+&nbsp;
 ### 2. 配置项目
 
 可以通过配置文件fossa.yml（config-file.md＃fossayml）或直接使用fossa命令的参数和标志来实现配置。 FOSSA CLI的构建旨在通过运行fossa init创建准确的配置文件，并且仅需手动配置即可进行复杂的构建或调整个人喜好。
@@ -49,10 +50,12 @@ analyze:
 可以通过包含诸如 **fossa analysis <module_type>:\<target>** 之类的参数来提供模块，该参数确定分析的类型，然后提供构建目标。 更多示例位于下面。
 > 注意：参数和标志配置优先于配置文件。
 
-Examples(https://github.com/fossas/fossa-cli/blob/master/docs/user-guide.md#examples)
+###### 举例 
+(https://github.com/fossas/fossa-cli/blob/master/docs/user-guide.md#examples)
 1. nodejs:.,rubygem:./docs
 2. go:./cmd/fossa
 
+&nbsp;
 ### 3. 分析项目
 
 1. 通过运行f **ossa analyst -o** 正确无误地验证分析是否成功。 此命令会将分析结果进行标准输出而不是上传。
@@ -64,9 +67,11 @@ Examples(https://github.com/fossas/fossa-cli/blob/master/docs/user-guide.md#exam
 
 根据您所处的环境，分析可能会有很大的不同。有关更多信息和可用选项，请参考受支持的各个环境页面(https://github.com/fossas/fossa-cli/blob/master/README.md/#supported-environments)。
 
+&nbsp;
 #### 上传自定义构建项目
 如果您的项目太复杂或您的项目系统高度定制，则fossa可能无法正确分析您的项目。 在这种情况下，您仍然可以使用fossa upload将项目构建信息上传到fossa.com进行构建分析和分类。
 
+&nbsp;
 ##### 数据格式
 自定义构建以以下格式上传：
 ```
@@ -92,7 +97,7 @@ type Dependency = {
 }
 ```
 
-
+&nbsp;
 ##### 定位器
 FOSSA中的项目和软件包由其定位器标识，该定位器是生态系统，软件包名称和软件包修订版的组合。
 生态系统(ecosystem)是以下之一：
@@ -118,17 +123,20 @@ FOSSA中的项目和软件包由其定位器标识，该定位器是生态系统
 他们组合为：
 ecosystem+package$revision
 
-Example:
+###### 举例
 ```
 npm+express$3.0.0
 go+github.com/golang/dep$06d527172446499363c465968a132d7aa528e550
 mvn+org.apache.hadoop:hadoop-core$2.6.0-mr1-cdh5.5.0
 ```
 
+&nbsp;
+&nbsp;
 
 ### 4. 命令行参考
 所有标志都应传递给调用的子命令。 当前不支持全局标志。
 
+###### 命令行参数
 | 命令           | 描述                           |
 | -----------   | -----------                    |
 | fossa         |  生成配置文件 & 分析当前配置       |
@@ -139,6 +147,7 @@ mvn+org.apache.hadoop:hadoop-core$2.6.0-mr1-cdh5.5.0
 | fossa report  |  获取有关最新的fossa扫描的信息     |
 | fossa update  |  更新当前的命令行版本              |
 
+&nbsp;
 #### fossa
 是 fossa init 和 fossa analyze 的合并
 
@@ -148,6 +157,7 @@ all-in-one 命令示例
 FOSSA_API_KEY=YOUR_API_KEY fossa
 ```
 
+&nbsp;
 #### fossa init
 尽最大努力从当前系统状态推断正确的配置。 如果成功，它将配置写入新的或现有的配置文件 (默认是 .fossa.yml)
 > Note: 如果配置文件已经存在， 该命令不会覆盖它
@@ -156,32 +166,35 @@ FOSSA_API_KEY=YOUR_API_KEY fossa
 
 默认情况下，**fossa init** 会过滤掉可能是开发，测试或依赖项的模块。 过滤器将删除文件路径中具有以下任何内容的所有模块：**docs**, **test**, **examples**, **third-party**, **vendor**, **tmp**, **node_modules**, **.srclib-cache**, **spec**, **Godeps**, **.git**, **bower_components**, **Carthage**, and **Checkouts**。 可以通过传递--include-all标志来禁用过滤。
 
-##### Example
+###### 举例
 ```
 # 在当前文件目录，创建 .fossa.yml 文件
 fossa init
 ```
 
-| Flag          | Short        | 描述           |
+###### 命令行参数
+| 命令行参数      | 参数缩写       | 描述           |
 | -----------   | -----------  |-------------- |
 | --include-all |              | 包含所有模块     |
 | --debug       |              | 打印debug信息   |
 | --help        |      -h      | 打印help信息    |
 
 
+&nbsp;
 #### fossa analyze
 分析项目的依赖项列表，可以选择将结果上传到FOSSA。 如果分析失败，请首先查看受支持的环境页面中的文档(https://github.com/fossas/fossa-cli/blob/master/README.md/#supported-environments)，以获取特定于您的环境的信息，以及可以设置为对您的设置进行条件化的标志。
 
 > 注意：除非设置了--output，否则分析需要API密钥。
 
 
-##### Example
+###### 举例
 ```
 # 使用.fossa.yml运行分析并上传到服务器端点。
 FOSSA_API_KEY=YOUR_API_KEY fossa analyze
 ```
 
-| Flag          | Short        | 描述           |
+###### 命令行参数
+| 命令行参数      | 参数缩写       | 描述           |
 | -----------   | -----------  |--------------  |
 | --config      |      -c      |  配置文件路径    |
 | --project     |      -p      |  项目           |
@@ -197,3 +210,78 @@ FOSSA_API_KEY=YOUR_API_KEY fossa analyze
 | --title       |      -t      |  设置显示在FOSSA UI中的标题。 仅适用于新项目       |
 
 > 注意：标题，策略和团队标志仅会在项目第一次上传时对其产生影响。 后续运行fossa analysis的所有标志都将被忽略。 创建此功能的目的是允许用户在首次上传时将项目与其团队相关联，但会阻止在UI中对CLI所做的更改。
+
+
+&nbsp;
+#### fossa test
+检查项目是否存在FOSSA中其策略配置的许可问题。 如果有问题，它将在**标准输出**(stdout)上打印它们，除非给出--suppress-issues标志，否则将以代码1退出。如果没有问题，则以代码0退出。Fossa测试可用于使CI管道工作(pipeline job)失败。
+
+> 注意：报表始终需要设置API密钥。 可以将仅推送API密钥用于fossa测试，但如果测试失败，不会显示具体问题。
+
+###### 举例
+```
+# Test your revision for issues and exit with a non-zero code if issues are found.
+FOSSA_API_KEY=YOUR_API_KEY_HERE fossa test --timeout 600
+```
+
+###### 命令行参数
+| 命令行参数          | 参数缩写      | 描述           |
+| -----------       | ----------- |--------------  |
+| --config          |  -c         | 配置文件路径     |
+| --project         |  -p         | 项目            |
+| --revision        |  -r         | 版本号          |
+| --endpoint        |  -e         | endpoint       |
+| --timeout         |             | 超时时间        |
+| --debug           |             | 打印debug信息   |
+| --help            |  -h         | 帮助           |
+| --suppress-issues |             | 即使出现错误, 不以1作为返回值结束 |
+
+
+&nbsp;
+#### fossa upload
+将用户提供的构建数据上传到FOSSA。 如果构建系统对于FOSSA的默认分析器而言过于复杂，则允许用户手动提供依赖项列表。
+>注意：上载始终需要设置API密钥。
+
+###### 举例
+```
+# 当fossa不能从git推断出项目名称和版本时，手动指定它们是很有用的。
+FOSSA_API_KEY=YOUR_API_KEY_HERE fossa upload --project=PROJECT_NAME --revision=SOME_HASH --data=output.txt
+```
+###### 命令行参数
+| 命令行参数          | 参数缩写      | 描述           |
+| -----------       | ----------- |--------------  |
+| --config          |  -c         | 配置文件路径     |
+| --project         |  -p         | 项目            |
+| --revision        |  -r         | 版本号          |
+| --endpoint        |  -e         | endpoint       |
+| --data            |             | 用户提供构建数据  |
+| --debug           |             | 打印debug信息   |
+| --help            |  -h         | 帮助           |
+
+
+&nbsp;
+#### fossa report
+
+报告使用现有配置文件访问FOSSA.com上的扫描报告，并将信息直接输出到命令行。 Report提供了三种不同的命令：
+
+##### 1. fossa report attribution
+输出项目的归因报告，其中包括有关所使用的依赖项及其许可证的信息。
+
+##### 2.  fossa report licenses
+输出有关项目使用的许可证和相应依赖项的详细信息。 有关案例，请参见FOSSA CLI的通告文件(https://github.com/fossas/fossa-cli/blob/master/NOTICE)。
+
+##### 3.  fossa report dependencies
+输出有关当前项目正在使用的依赖项的详细信息。
+> 注意：fossa report 需要设置API密钥。
+
+###### 举例
+```
+FOSSA_API_KEY=YOUR_API_KEY_HERE fossa report licenses --json
+```
+
+###### 命令行参数
+| 命令行参数     | 参数缩写      | 描述                 |
+| -----------  | ----------- |--------------       |
+| --json       |             | 以json格式打印报告信息  |
+| --debug      |             | 打印debug信息         |
+| --help       |  -h         | 帮助                 |
