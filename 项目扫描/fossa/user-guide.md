@@ -24,7 +24,7 @@ $env:Path += ";C:\ProgramData\fossa-cli"
 &nbsp;
 ### 2. 配置项目
 
-可以通过配置文件fossa.yml（config-file.md＃fossayml）或直接使用fossa命令的参数和标志来实现配置。 FOSSA CLI的构建旨在通过运行fossa init创建准确的配置文件，并且仅需手动配置即可进行复杂的构建或调整个人喜好。
+可以通过配置文件fossa.yml（config-file.md＃fossa.yml）或直接使用fossa命令的参数和标志来实现配置。 FOSSA CLI的构建旨在通过运行fossa init创建准确的配置文件，并且仅需手动配置即可进行复杂的构建或调整个人喜好。
 
 #### 2.1 配置文件
 通过在要分析的项目的根目录下运行 **fossa init** 来创建配置文件。 cli将在文件树中向下移动并搜索所有相关模块。
