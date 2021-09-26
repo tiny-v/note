@@ -5,6 +5,7 @@
 > 3. https://baike.baidu.com/item/http/243074 (百度百科)
 > 4. https://zhuanlan.zhihu.com/p/86426969 (TCP连接三次握手四次挥手)
 > 5. https://blog.csdn.net/shouwang666666/article/details/70232053 （HTTP请求/响应报文结构）
+> 6. https://cloud.tencent.com/developer/section/1190064 （RFC 2616:HTTP/1.1）
 
 ## OSI七层模型简介
 ![OSI七层模型](./images/OSI七层模型.png)
@@ -13,9 +14,8 @@
 
 
 ### Request报文的构成
-> 一个HTTP请求报文由四个部分组成：**请求行**、**请求头部**、**空行**、**请求数据**
-### Http Request 请求的构成
-> 一个HTTP请求报文由四个部分组成：请求行、头部字段、空行(CR+LF)、请求数据
+> 一个HTTP请求报文由四个部分组成：**请求行**、**头部字段**、**空行(CR+LF)**、**请求数据**
+
 1. 请求行
 > 由请求方法字段、URL字段和HTTP协议版本字段3个字段组成: 
 ```
@@ -31,7 +31,7 @@ GET /data/info.html HTTP/1.1
 4. 请求实体
 
 ### Response报文的构成
-> 一个HTTP响应报文由三部分组成：状态行、响应头、空行(CR+LF)、响应实体
+> 一个HTTP响应报文由四部分组成：**状态行**、**响应头**、**空行(CR+LF)**、**响应实体**
 1. 状态行
    >  HTTP版本 + 状态码
 2. 响应头
