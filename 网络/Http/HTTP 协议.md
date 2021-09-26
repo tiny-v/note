@@ -1,45 +1,50 @@
 # HTTP 
 参考文档:
-> 1. https://cloud.tencent.com/developer/article/1464938 (详解HTTP/1.0、HTTP/1.1、HTTP/2、HTTPS)
-> 2. https://baike.baidu.com/item/http/243074 (百度百科)
-> 3. https://zhuanlan.zhihu.com/p/86426969 (TCP连接三次握手四次挥手)
-> 4. https://blog.csdn.net/shouwang666666/article/details/70232053 （HTTP请求/响应报文结构）
+> 1. 《图解HTTP》 
+> 2. https://cloud.tencent.com/developer/article/1464938 (详解HTTP/1.0、HTTP/1.1、HTTP/2、HTTPS)
+> 3. https://baike.baidu.com/item/http/243074 (百度百科)
+> 4. https://zhuanlan.zhihu.com/p/86426969 (TCP连接三次握手四次挥手)
+> 5. https://blog.csdn.net/shouwang666666/article/details/70232053 （HTTP请求/响应报文结构）
 
 ## OSI七层模型简介
 ![OSI七层模型](./images/OSI七层模型.png)
 
+![HTTP通信传输图](./images/HTTP通信传输.png)
+
 
 ### Http Request 请求的构成
-> 一个HTTP请求报文由四个部分组成：请求行、请求头部、空行、请求数据
+> 一个HTTP请求报文由四个部分组成：请求行、头部字段、空行(CR+LF)、请求数据
 1. 请求行
-   > 由请求方法字段、URL字段和HTTP协议版本字段3个字段组成: eg:  GET /data/info.html HTTP/1.1
+> 由请求方法字段、URL字段和HTTP协议版本字段3个字段组成: 
+```
+demo:
+
+GET /data/info.html HTTP/1.1
+```   
+  
 2. 请求头
-   ```
-    Accept: application/json
-    Accept-Encoding: gzip, deflate, br
-    Accept-Language: zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7
-    Connection: keep-alive
-    Content-Length: 99
-    Content-Type: application/json
-    Cookie: departmentId=null; departmentName=null; portals=undefined; passwordIsExpireSoon=false; loginName=hyadmin; sessionId=identity:login.session:9de0a582-0f01-4a19-b9a5-d9a6452295c3_10.51.30.185_a4db1b18-c91e-4910-bebf-5faeba1517e0; userName=%E8%B6%85%E7%BA%A7%E7%AE%A1%E7%90%86%E5%91%98
-    Host: 178.119.202.100
-    Origin: https://178.119.202.100
-    Referer: https://178.119.202.100/acos/compute/instance?logicalZoneId=7bb23ed8-1a23-4fc2-b5e0-829078285495
-    sec-ch-ua: "Chromium";v="92", " Not A;Brand";v="99", "Google Chrome";v="92"
-    sec-ch-ua-mobile: ?0
-    Sec-Fetch-Dest: empty
-    Sec-Fetch-Mode: cors
-    Sec-Fetch-Site: same-origin
-    User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36
-    ```
-3. 请求正文
+   > 由 请求头部字段 + 通用头部字段 + 实体首部字段 组成;
+3. 空行
+   > CR+LF : 用于隔离请求头和请求实体
+4. 请求实体
 
 ### Http Response 的构成
-> 一个HTTP响应报文由三部分组成：响应行、响应头、响应体
+> 一个HTTP响应报文由三部分组成：状态行、响应头、空行(CR+LF)、响应实体
 1. 状态行
-   
+   >  HTTP版本 + 状态码
 2. 响应头
-3. 响应正文
+   > 由 响应头部字段 + 通用头部字段 + 实体首部字段 组成;
+3. 空行
+   > CR+LF : 用于隔离响应头和响应实体   
+4. 响应实体
+
+
+### 状态码
+
+
+### 头部字段
+
+
 
 ### 发展史
 > 1. HTTP/0.9：1991年发布，极其简单，只有一个get命令
