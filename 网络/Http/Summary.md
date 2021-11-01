@@ -6,17 +6,20 @@
 > 4. https://zhuanlan.zhihu.com/p/86426969 (TCP连接三次握手四次挥手)
 > 5. https://blog.csdn.net/shouwang666666/article/details/70232053 （HTTP请求/响应报文结构）
 > 6. https://cloud.tencent.com/developer/section/1190064 （RFC 2616:HTTP/1.1）
+> 7. https://baijiahao.baidu.com/s?id=1626599028653203490&wfr=spider&for=pc(GET和POST的区别详细解说)
 
-## 一、OSI七层模型简介
+## HTTP传输图解 
+### 一、OSI七层模型简介
 ![OSI七层模型](./images/OSI七层模型.png)
 
+### 二、HTTP通信传输图
 ![HTTP通信传输图](./images/HTTP通信传输.png)
 
 
 ## 二、报文的构成
 
 ### Request报文的构成
-> 一个HTTP请求报文由四个部分组成：**请求行**、**头部字段**、**空行(CR+LF)**、**请求数据**
+> 一个HTTP请求报文由四个部分组成：**请求行**、**请求头**、**空行(CR+LF)**、**请求数据**
 
 1. 请求行
     > 由请求方法字段、URL字段和HTTP协议版本字段3个字段组成:
@@ -38,7 +41,28 @@
 4. 响应实体
 
 
+### 请求头 （比较重要）
+
+
+### 请求方法
+
+|    名称          | 引入版本   |   含义                      |
+| ----------------| --------- |--------------------------- |
+| GET             |  HTTP/0.9 | 查询资源，类比SQL Select      |
+| POST            |  HTTP/1.0 | |
+| HEAD            |  HTTP/1.0 | Response只返回Head,不返回body |
+| PUT             |  HTTP/1.1 | 更新全部资源，类比SQL Update 方法  |
+| PATCH           |  HTTP/1.1 | 更新部分资源，如果资源不存在，  |
+| DELETE          |  HTTP/1.1 | |
+| OPTIONS         |  HTTP/1.1 | |
+| TRACE           |  HTTP/1.1 | |
+| CONNECT         |  HTTP/1.1 | |
+注: 协议规范是一回事儿， 容器有没有实现协议规范是另一回事儿， 具体要以实际情况为准。
+
 ### 三、响应状态码
+
+
+
 
 
 

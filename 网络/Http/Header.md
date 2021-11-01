@@ -15,6 +15,8 @@
 |   Via               |  代理服务器的相关信息      |
 |   Warning           |  错误通知                |
 
+Cache-Control
+
 
 ### 请求首部
 
