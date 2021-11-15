@@ -11,15 +11,15 @@
 > 5. https://blog.csdn.net/shouwang666666/article/details/70232053 （HTTP请求/响应报文结构）
 > 6. https://cloud.tencent.com/developer/section/1190064 （RFC 2616:HTTP/1.1）
 > 7. https://baijiahao.baidu.com/s?id=1626599028653203490&wfr=spider&for=pc(GET和POST的区别详细解说)
-
-
+> 8. https://segmentfault.com/a/1190000002601640 (http2 - stream)
+> 9. https://halfrost.com/http2-http-frames/ (HTTP/2中的HTTP帧和流的多路复用)
 
 ## 一、 发展史
 > 1. HTTP/0.9：1991年发布，极其简单，只有一个get命令
 > 2. HTTP/1.0：1996年5月发布，增加了大量内容
 > 3. HTTP/1.1：1997年1月发布，进一步完善HTTP协议，是目前最流行的版本
 > 4. SPDY ：2009年谷歌发布SPDY协议，主要解决HTTP/1.1效率不高的问题
-> 5. HTTP/2 ：2015年借鉴SPDY的HTTP/2发布
+> 5. HTTP/2 ：2015年借鉴SPDY的HTTP/2发布, 谷歌宣布放弃SPDY, 转而支持HTTP/2
 
 ## 二、 HTTP/0.9
 
@@ -27,7 +27,7 @@
 
 ## 三、 HTTP/1.0
 
-#### 1 增加内容
+#### 1. 增加内容
 
  *  请求和响应支持Header，用来描述一些元数据.
  *  请求方式除了GET外，增加了请求方式POST和HEAD
@@ -38,8 +38,26 @@
  *  权限(authorization)
  *  缓存(cache) 
  *  内容编码(content encoding）
+ *  ...........
 
-   &nbsp;&nbsp;&nbsp;。。。。
+#### 2. 部分内容介绍
+* **内容编码(Content Encoding)**
+```
+介绍：
+
+1. 网站服务器生成原始响应报文，其中有原始的 Content-Type 和 Content-Length 首部。
+2. 内容编码服务器（也可能就是原始的服务器或下行的代理）创建编码后的报文，编码后的报文有同样的 Content-Type 但 Content-Length 可能不同（比如主体被压缩了）。内容编码服务器在编码后的报文中增加 Content-Encoding 首部，这样接收的应用程序就可以进行解码了。
+3. 接收程序得到编码的报文，进行解码，获得原始报文。
+```
+常用编码：
+
+| 编码      | 描述 |
+|------    |--------|
+| gzip     | 表明实体采用 GNU zip 编码  |
+| compress | 表明实体采用 Unix 的文件压缩程序 |
+| deflate  | 表明实体采用 zlib 的格式压缩 |
+| identity | 表明没有对实体进行编码。当没有 Content-Encoding 首部是，就默认为这种情况 |
+> gzip、compress 以及 deflate 编码都是无损压缩算法，用于减少传输报文的大小，不会导致信息损失。这些算法中，gzip 通常是效率最高的，使用最为广泛。
 
 #### 2 缺陷 
 客户端和服务端只保持短暂的连接，客户端每次请求都需要与服务端建立一个TCP连接。（TCP连接的新建成本很高，因为需要客户端和服务端三次握手），
@@ -47,6 +65,8 @@
 
 ## 三、HTTP/1.1
 #### 1 增加内容：
+
+#### 2 部分内容介绍：
 
  * **长连接(Persistent Connection)**：</br>
    ```
@@ -125,23 +145,55 @@
 2009年谷歌发布SPDY协议，主要解决HTTP/1.1效率不高的问题
 
 ## 五、HTTP/2.0
+> HTTP/2.0 主要是对上个版本HTTP/1.1的性能优化
 
-####  HTTP/2.0 主要是对上个版本的性能优化
+#### 1. 增加内容
+* 二进制分帧
+* 多路复用
+* 头部压缩
+* 流量控制
+* 请求优先级
+* 服务端推送
 
-* 二进制分帧（Binary Format）- http2.0的基石
 
-* 多路复用 (Multiplexing) / 连接共享
+#### 2.部分内容解释 
 
-* 头部压缩（Header Compression）
+* **二进制分帧（Binary Framing）** 
 
-* 请求优先级（Request Priorities）
+```
+   1. 在加密协议层之上， 增加了一个二进制分帧层；
+   2. 把一个请求的Header数据和Data数据, 切分成多个帧（frame）, 且数据转成二进制形式(以前是ASCII), 以帧为最小的数据传输单位。 
+```
 
-* 服务端推送（Server Push）
+##### 二进制分帧层 和 header&data frame
+![img.png](images/二进制分帧.png)
+
+##### 帧的结构
+![帧的结构](images/帧的结构.png)
+
+* **多路复用 (Multiplexing)**
+
+```
+ 1. 客户端和服务端的单个域(domain)之间， 只建立一个TCP连接， 所有的frame传输，都通过这个一个连接传输；
+ 2. 每个帧的结构里，都有一个 Stream Identifier字段，标识着属于哪个流(Stream). Stream为一组共享同一StreamID的Frame集合, 是一个独立的，客户端和服务端在HTTP/2连接下交换帧的双向序列集;
+ 3. 不同请求的帧，在传输时是无序的， 但在流上发送帧的顺序非常重要。 接收方按照收到的顺序处理帧。特别是，HEADERS 和 DATA 帧的顺序在语义上是重要的.
+```
+
+
+![img_1.png](images/多路复用.png)
+
+* **头部压缩（Header Compression）**
+
+* **流量控制**
+
+* **请求优先级（Request Priorities）**
+
+* **服务端推送（Server Push）**
 
 
 
 ## 六、HTTP/3.0
 
-
+暂未推出正式版
 
 
