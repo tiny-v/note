@@ -33,8 +33,7 @@
  *  请求方式除了GET外，增加了请求方式POST和HEAD
  *  响应的数据格式**Content-Type**: 告诉客户端实际返回的内容的内容类型,  支持多种格式， 比如 text/html、image/jpeg等
  *  状态码(status code)
- *  多字符集支持 
- *  多部分发送(multi-part type)
+ *  多字符集支持
  *  权限(authorization)
  *  缓存(cache) 
  *  内容编码(content encoding）
@@ -154,6 +153,7 @@
 * 流量控制
 * 请求优先级
 * 服务端推送
+* 。。。
 
 
 #### 2.部分内容解释 
@@ -183,13 +183,15 @@
 ![img_1.png](images/多路复用.png)
 
 * **头部压缩（Header Compression）**
+```
+ 实现方式较繁琐，自己去看吧： https://halfrost.com/http2-header-compression/
+```
 
-* **流量控制**
-
-* **请求优先级（Request Priorities）**
 
 * **服务端推送（Server Push）**
-
+```
+  以前是必须客户端请求，服务端才能响应。 现在服务端也可以主动推送内容给客户端， 而客户端也有权选择是否接收。 
+```
 
 
 ## 六、HTTP/3.0
