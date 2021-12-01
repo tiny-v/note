@@ -7,3 +7,6 @@
 
 ## 2. HTTP通信传输图
 ![HTTP通信传输图](./images/HTTP通信传输.png)
+
+## 3. HTTP协议和其它协议的关系
+![http协议和其它协议的关系](images/http_protocol_relation.png)
