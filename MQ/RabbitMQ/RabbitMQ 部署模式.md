@@ -1,1 +1,1 @@
-## RabbitMQ 队列
+## RabbitMQ 部署模式

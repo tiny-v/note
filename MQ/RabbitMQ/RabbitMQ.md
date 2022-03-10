@@ -15,7 +15,7 @@
 ### 概念
 Message: 由 Properties 和 Body 组成， Properties可对消息进行修饰，比如消息的优先级，延迟等高级特性； Body就是消息体中的内容；
 
-Virtual Host: 虚拟地址，用于进行逻辑隔离，是最上层的消息路由。一个Virtual Host里面可以有若干个Exchange和Queue，但不能存在相同名称的Exchange或相同名称的Queue.
+Virtual Host: 虚拟主机，用于进行逻辑隔离，是最上层的消息路由。一个Virtual Host里面可以有若干个Exchange和Queue，但不能存在相同名称的Exchange或相同名称的Queue.
 
 Exchange: 交换机，接受消息，根据路由键转发消息道绑定的队列
 
