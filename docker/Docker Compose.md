@@ -36,18 +36,19 @@
 ##### 2. 使用Pip安装 docker compose:
 > 我自己通过上面的安装方法，并没能安装成功。 主要是因为从github上下载 docker-compose 包这一步网络不稳，下不下来。 改用pip来安装可以成功
 
-&emsp; 2.1 安装pip3 (centos8)
+ 2.1 安装pip3 (centos8)
 
-      sudo dnf install python3-paramiko
-      sudo dnf install python3
-      pip3 --version
+```
+yum install -y python36
+```
 
 &emsp; 2.2 使用pip3安装 docker compose
 
-      pip3 install docker-compose
-      docker-compose --version      
-       
+```
+pip3 install docker-compose
 
+docker-compose --version             
+```
 
 #### 2.3 Compose文件
 

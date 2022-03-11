@@ -1,26 +1,26 @@
 ## 安装docker ( Centos8 安装Docker社区版(docker-ce) )
 
 
-1. 安装基础工具：
+#### 1. 安装基础工具：
 
-	sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+> sudo yum install -y yum-utils device-mapper-persistent-data lvm2
    
    
-2. 因为在阿里云的ecs机器上面，yum镜像使用的阿里云的，找不到docker的镜像，所以需要在安装基础工具之后使用yum-config-manager来添加对应的yum仓库。 
+#### 2. 因为在阿里云的ecs机器上面，yum镜像使用的阿里云的，找不到docker的镜像，所以需要在安装基础工具之后使用yum-config-manager来添加对应的yum仓库。 
 
-	sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+> sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 
 
-3. 安装最新版的 containerd.io 
+#### 3. 安装最新版的 containerd.io 
 
-	sudo yum install https://download.docker.com/linux/centos/7/x86_64/stable/Packages/containerd.io-1.2.6-3.3.el7.x86_64.rpm
+> sudo yum install -y https://download.docker.com/linux/centos/7/x86_64/stable/Packages/containerd.io-1.2.6-3.3.el7.x86_64.rpm
 	
-netstat -lntp  // 查看所有被监听的端口号
+> netstat -lntp  // 查看所有被监听的端口号
 	
 	
-4. 安装docker-ce
+#### 4. 安装docker-ce
 
-	sudo yum install docker-ce docker-ce-cli containerd.io
+> sudo yum install -y docker-ce docker-ce-cli containerd.io
 
 	
 ## Docker 常用命令
