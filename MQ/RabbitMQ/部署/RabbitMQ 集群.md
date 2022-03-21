@@ -2,6 +2,7 @@
 
 ### 参考文档
 > 深入理解RabbitMQ 
+> 
 > https://cloud.tencent.com/developer/article/1391426 (rabbitmq 原理、集群、基本运维操作、常见故障处理)
 
 ## 一、节点
