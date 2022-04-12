@@ -32,4 +32,4 @@ Channel仅存在于Connection的上下文中，从不单独存在。当Connectio
 
 鉴于这两个因素，强烈建议限制每个连接使用的Channel数。根据经验，大多数应用程序可以在每个连接中使用一位数的Channel数。那些并发率特别高的（通常这样的应用程序是消费者）可以从每个线程/进程/协程一个Channel开始，当指标表明原始模型不再可持续时切换到Channel池，例如。因为它消耗了太多的内存。
 
-### channel pool
+## 连接池（Connection & Channel）
