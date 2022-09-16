@@ -23,32 +23,44 @@ chmod +777 /opt/redis/conf/redis.conf
 
 #### redis.yaml
 ```
-version: "3.1"
+version: "3.2"
+# 定义所有的service信息, services下第一级别的key就是service的名称(比如redis)
 services:
+  # Service名称
   redis:
+    # 指定 docker 镜像, 可以是远程仓库镜像、本地镜像
     image: redis:7.0
     hostname: redis
+    # 指定容器的名称 (等同于 docker run --name 的作用)
     container_name: redis
+ 
+    # 配置docker container的环境变量
+    # environment 的值可以覆盖 env_file 的值 (等同于 docker run --env 的作用)
     environment:
       - TZ=Asia/Shanghai
-      - redisPWD=123456
-    privileged: true 
-    mem_limit: 512m
-    cpus: 1
+    privileged: true   
+    deploy:
+      resources:
+         limits:
+            cpus: "1.00"
+            memory: 512M
+         reservations:
+            memory: 200M
     ports:
       - 6379:6379
     volumes:
       - "/opt/redis/conf/redis.conf:/etc/redis.conf"
       - "/opt/redis/logs:/var/log/redis"
-      - "/opt/redis/data:/data"
-    command:
-      redis-server /etc/redis.conf
+      - "/opt/redis/data:/data"   
     ulimits:
       nproc: 65535
       nofile:
         soft: 20000
         hard: 40000
-    restart: always
+    restart: always    
+    # 容器启动后, 默认执行的命令, 支持 shell 格式和 [] 格式
+    command:
+      redis-server /etc/redis.conf
 ```
 
 #### redis.conf 
