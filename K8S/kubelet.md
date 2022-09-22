@@ -1,26 +1,26 @@
-## K8S 常用命令 Kubelet
+# K8S 常用命令 Kubelet
 
-### 1. kubectl get [资源类型] **[-n]** [-o]
+## <font color=red>get</font>(查看资源对象)
 
-* [资源类型]： pods | deployments | nodes
+* **kubectl get** <font color=red>[资源类型]</font>： pod | deployment | node | replicaset | service | ...
 ```
-* 查看Pods列表 - kubectl get pods 
+* 查看Pod列表 - kubectl get pod
 
-* 查看Deployment列表 - kubectl get deployments
+* 查看Deployment列表 - kubectl get deployment
 
-* 查看nodes列表 - kubectl get nodes
+* 查看Node列表 - kubectl get node
 
-* 查看replicasets列表 - kubectl get replicasets
+* 查看Replicaset列表 - kubectl get replicaset
 ```
 
-* **[-n]**: 查询指定命名空间
+* **kubectl get [资源类型]** <font color=red>[-n]</font> : 查询指定命名空间
 ```
 * 查询所有命名空间下的资源: kubectl get pods -a
 
 * 查询指定命名空间下的资源: kubectl get pods -n [命名空间名称]
 ```
 
-* [-o]：格式化输出 
+* **kubectl get [资源类型]** <font color=red>[-o]</font>：格式化输出 
 
 | 命令 | 含义|
 | ------------------------ | ------------------------------ |
@@ -32,3 +32,10 @@
 | -o=name	| 仅输出资源对象的名称 |
 | -o=wide	| 输出额外信息。对于Pod，将输出Pod所在的Node名 |
 | -o=yaml	| 以yaml格式显示结果 |
+
+## <font color=red>describe</font>
+
+
+# edit
+
+kubectl edit replicaset [rs_name]
