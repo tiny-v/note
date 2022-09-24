@@ -41,3 +41,7 @@ HTTP/1.1 规范允许一台HTTP服务器搭建多个Web站点，如下图：即�
 > 隧道是在相隔甚远的客户端和服务器两者之间进行中转， 并保持双方通信连接的应用程序。
 
 ![隧道.png](images/tunnal.png)
+
+## 3. 各种协议和HTTP协议的关系
+
+![img.png](images/protocol_releation.png)
